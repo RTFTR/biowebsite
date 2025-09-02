@@ -7,17 +7,6 @@ body {
 }
 
 #terminal {
-  position: fixed;
-  top: 50px;
-  left: 50px;
-  width: 600px;
-  height: 500px;
-  background-color: #1e1e1e;
-  color: #ffffff;
-  border-radius: 10px;
-  z-index: 1000;
-  border: 2px solid #4d4d4d;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (max-width: 600px) {
@@ -34,6 +23,20 @@ body {
   display: flex;
   justify-content: flex-start;
   transition: background-color 0.3s;
+}
+
+#click-to-start {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    color: white;
+    text-shadow: 0 0 10px black;
+    cursor: pointer;
+    z-index: 9999; /* on top of everything */
+    pointer-events: none; /* allows clicks to pass through */
 }
 
 #terminal-header:hover {
