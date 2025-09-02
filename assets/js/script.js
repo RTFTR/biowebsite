@@ -15,35 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
   videoBackground.pause();
 
   function typeWriter() {
-      var line = currentIndex === 0 ? getAsciiArt() : terminalTextContent[currentIndex - 1];
-      var i = 0;
-
-      function typeChar() {
-          if (i < line.length) {
-              terminalText.textContent += line.charAt(i);
-              i++;
-              setTimeout(typeChar, currentIndex === 0 ? 10 : 50);
-          } else {
-              terminalText.textContent += "\n";
-              currentIndex++;
-              if (currentIndex < terminalTextContent.length + 1) {
-                  typeWriter();
-              } else {
-                  addEventListeners();
-              }
-          }
-      }
-
-      if (currentIndex === 0) {
-          terminalText.style.transform = 'scale(5)';
-          terminalText.style.opacity = '0';
-          terminalText.style.transition = 'transform 1.5s ease-out, opacity 1.5s ease-out';
-          void terminalText.offsetWidth;
-          
-          terminalText.style.transform = 'scale(1)';
-          terminalText.style.opacity = '1';
-      }
-
+      addEventListeners();
       handleInput();
   }
 
