@@ -180,16 +180,16 @@ body {
   display: flex;
   align-items: center;
   margin: 0 10px;
-  color: #ffffff;
+  color: rgb(175, 175, 175);
   text-decoration: none;
   transition: color 0.3s;
   transition: transform 0.3s ease;
 }
 
 .links a:hover {
-  color: rgb(214, 109, 255);
+  color: rgb(255, 255, 255);
   text-decoration: underline;
-  transform: translateY(-5px) scale(1.1);
+  transform: translateY(-7px) scale(1.25);
 }
 
 .links a i {
