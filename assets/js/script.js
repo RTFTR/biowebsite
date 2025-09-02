@@ -23,30 +23,33 @@ document.addEventListener('DOMContentLoaded', function() {
     clickOverlay.style.textAlign = 'center';
 
     function startExperience(event) {
-        // Only trigger once
-        document.removeEventListener('keydown', onKeyDown);
-        document.removeEventListener('click', onClick);
-        clickOverlay.remove();
+    // Only trigger once
+    document.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener('click', onClick);
+    clickOverlay.remove();
 
-        // Show video and UI
-        blurredBox.style.display = 'block';
-        musicControls.style.display = 'flex';
-        document.body.classList.add('video-normal');
+    blurredBox.style.display = 'block';
+    musicControls.style.display = 'flex';
+    document.body.classList.add('video-normal');
 
-        // Play video
-        videoBackground.play().catch(e => console.log('Video play error:', e));
+    videoBackground.play().catch(e => console.log('Video play error:', e));
 
-        // Play music safely on mobile
-        if (window.MusicPlayer) {
-            const audio = window.MusicPlayer.getAudio();
-            audio.muted = true; // start muted for iOS
-            audio.play()
-                .then(() => {
-                    audio.muted = false; // unmute immediately
-                })
-                .catch(err => console.error('Audio play error:', err));
+      if (window.MusicPlayer) {
+        const audio = window.MusicPlayer.getAudio();
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            audio.muted = true;
+            audio.play().then(() => {
+                audio.muted = false;
+            }).catch(err => console.error('Audio play error:', err));
+        } else {
+            // Desktop: just play normally
+            audio.play().catch(err => console.error('Audio play error:', err));
         }
     }
+}
+
 
     function onKeyDown(e) { startExperience(e); }
     function onClick(e) { startExperience(e); }
