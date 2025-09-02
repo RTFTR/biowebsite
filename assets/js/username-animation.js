@@ -3,17 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const cursorElement = document.getElementById('typing-cursor');
   
   const usernameVariants = [
-    "c0mplex", 
-    "Front-end Developer",
-    "Currently learning Back-end",
-    "To Yeu Cau ♥︎"
+    "RTF"
   ];
   
   let currentText = '';
   let isDeleting = false;
   let textIndex = 0;
-  let speed = 120;
-  let pauseTime = 1500;
+  let speed = 150;
+  let pauseTime = 1750;
   
   function typeEffect() {
     const fullText = usernameVariants[textIndex];

@@ -1,5 +1,5 @@
 const songs = [
-    "What Lovers Do - Maroon 5  Elemer Remix (Lyrics + Vietsub) ♫.mp3"
+    "default.mp3"
 ];
 
 let currentSongIndex = 0;
@@ -7,6 +7,7 @@ let isPlaying = false;
 const audio = new Audio();
 
 audio.volume = 1.0;
+audio.crossOrigin = "anonymous";
 
 function shuffleArray(array) {
     const newArray = [...array];
@@ -26,6 +27,7 @@ function initMusicPlayer() {
 
 function startMusicAfterTerminal() {
     isPlaying = true;
+    
     audio.play()
         .catch(error => {
             console.error("Music playback error:", error);

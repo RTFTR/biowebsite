@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var closeButton = document.getElementById('close-button');
 
   var terminalTextContent = [
-      "User: My Love",
-      "IP: Loading...",
-      "System: Loading...",
-      "Bio Loaded",
       "Press Enter To Continue",
   ];
   var currentIndex = 0;
@@ -48,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
           terminalText.style.opacity = '1';
       }
 
-      typeChar();
+      setTimeout(handleInput, 750);
   }
 
   function handleInput() {
@@ -188,20 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
   terminalText.style.textAlign = 'center';
 
   function getAsciiArt() {
-      return `
-    ⡟⠛⠻⠛⠻⣿⣿⡿⠛⠉⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-    ⡇⠐⡀⠂⢁⠟⢁⣠⣶⣿⡄⢹⣿⣿⣿⣿⣿⠿⠿⠛⣉⣉⡄⢹
-    ⣿⣦⣄⡕⠁⣴⣿⣿⣿⡿⢋⣀⣤⡤⢀⠄⣤⣶⣾⣿⣿⣿⡇⠀
-    ⣿⣿⡟⢠⣾⣿⣿⣿⣿⠁⢆⣾⣿⡁⢎⣾⣿⣿⣿⣿⣿⣿⡇⢠
-    ⡿⠟⢠⣿⠟⠻⣿⣿⣿⣿⣾⣿⣿⣶⣾⣿⣿⣿⣿⣿⣿⣿⠃⣸
-    ⡆⢻⣿⡿⠖⠀⠈⢻⣿⢻⣿⣿⣿⣷⣟⠿⠟⠛⠙⢿⣿⣿⠀⣿
-    ⢁⣾⣿⣇⣤⣴⣾⣿⣿⣮⣭⣬⣭⣾⣧⢄⠀⠒⢶⣿⣿⣿⠧⠘
-    ⠀⣿⠛⠡⠂⠀⡀⠈⠙⠟⠉⠉⠀⠀⢍⠺⣷⣦⣾⣿⣿⣿⣦⡉
-    ⣧⠘⣈⣤⡀⠁⠄⡈⠄⡀⠂⠌⢐⣀⣀⠱⠘⣟⡿⣿⣿⣶⠉⣴
-    ⡟⢰⣿⣿⣿⠀⠚⠄⠠⠐⢀⠂⣿⣿⣿⣿⣶⣬⡺⣹⢲⡞⠆⢹
-    ⡇⢸⣿⣿⣟⠀⠀⠂⠁⠀⣂⠀⠹⣿⢿⣿⣿⣿⣿⣷⣭⡀⢴⣿
-    ⣷⡌⠻⡿⠋⠄⠀⠀⠀⠐⠀⠃⠀⠙⢷⣿⣿⣿⣿⣾⣿⣿⣦⡙ 
-  `;
+      return ``;
   }
 
   document.body.classList.remove('video-normal');
