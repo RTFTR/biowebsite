@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create overlay text
     const clickOverlay = document.createElement('div');
     clickOverlay.id = 'click-to-start';
-    clickOverlay.textContent = 'Click anywhere!';
+    clickOverlay.textContent = 'To see my bio, Click anywhere!';
     document.body.appendChild(clickOverlay);
 
     // Center overlay with CSS
