@@ -1,13 +1,10 @@
-const songs = [
-    "default.mp3"
-];
-
+const songs = ["default.mp3"];
 let currentSongIndex = 0;
 let isPlaying = false;
 const audio = new Audio();
 
 audio.volume = 1.0;
-audio.crossOrigin = "anonymous";
+audio.crossOrigin = "anonymous"; // CORS fix
 
 function shuffleArray(array) {
     const newArray = [...array];
@@ -25,21 +22,17 @@ function initMusicPlayer() {
     audio.addEventListener('ended', nextSong);
 }
 
-function startMusicAfterTerminal() {
+function startMusicAfterInteraction() {
+    if (isPlaying) return; // avoid multiple triggers
     isPlaying = true;
-    
-    audio.play()
-        .catch(error => {
-            console.error("Music playback error:", error);
-            setTimeout(() => {
-                audio.play().catch(e => console.error("Retry error:", e));
-            }, 1000);
-        });
+
+    audio.play().catch(error => {
+        console.error("Music playback error:", error);
+    });
 }
 
 function loadSong(index) {
     audio.src = `./assets/music/${shuffledSongs[index]}`;
-    
     if (isPlaying) {
         audio.play().catch(error => console.error("Play error:", error));
     }
@@ -53,9 +46,18 @@ function nextSong() {
 document.addEventListener('DOMContentLoaded', () => {
     shuffledSongs = shuffleArray([...songs]);
     initMusicPlayer();
+
+    // Listen for any user interaction to start music
+    const userInteractionEvents = ['click', 'keydown', 'touchstart'];
+    const startMusicHandler = () => {
+        startMusicAfterInteraction();
+        // remove listeners after first interaction
+        userInteractionEvents.forEach(event => document.removeEventListener(event, startMusicHandler));
+    };
+    userInteractionEvents.forEach(event => document.addEventListener(event, startMusicHandler));
 });
 
 window.MusicPlayer = {
-    start: startMusicAfterTerminal,
+    start: startMusicAfterInteraction,
     getAudio: () => audio
 };
