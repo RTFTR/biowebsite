@@ -18,14 +18,16 @@ let shuffledSongs = shuffleArray(songs);
 
 function initMusicPlayer() {
     loadSong(currentSongIndex);
-    audio.addEventListener('ended', nextSong);
+
+    // When a song ends, pick a new one and play immediately
+    audio.addEventListener('ended', () => {
+        nextSong();
+        audio.play().catch(err => console.error('Play error on loop:', err));
+    });
 }
 
 function loadSong(index) {
     audio.src = `./assets/music/${shuffledSongs[index]}`;
-    if (isPlaying) {
-        audio.play().catch(err => console.error("Play error:", err));
-    }
 }
 
 function nextSong() {
@@ -36,9 +38,7 @@ function nextSong() {
 function startMusicAfterTerminal() {
     if (!isPlaying) {
         isPlaying = true;
-        audio.play().catch(err => {
-            console.error("Music playback error:", err);
-        });
+        audio.play().catch(err => console.error('Music playback error:', err));
     }
 }
 
