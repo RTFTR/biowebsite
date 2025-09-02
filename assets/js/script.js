@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
           terminalText.style.opacity = '1';
       }
 
-      setTimeout(handleInput, 750);
+      handleInput();
   }
 
   function handleInput() {
