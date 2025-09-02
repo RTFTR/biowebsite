@@ -18,17 +18,17 @@ function shuffleArray(array) {
 let shuffledSongs = shuffleArray(songs);
 
 function initMusicPlayer() {
-    loadSong(currentSongIndex);
+    // Only set the first song; do NOT call play()
+    audio.src = `./assets/music/${shuffledSongs[currentSongIndex]}`;
     audio.addEventListener('ended', nextSong);
 }
 
 function startMusicAfterInteraction() {
-    if (isPlaying) return; // avoid multiple triggers
+    if (isPlaying) return;
     isPlaying = true;
 
-    audio.play().catch(error => {
-        console.error("Music playback error:", error);
-    });
+    audio.play()
+        .catch(error => console.error("Music playback error:", error));
 }
 
 function loadSong(index) {
@@ -47,14 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
     shuffledSongs = shuffleArray([...songs]);
     initMusicPlayer();
 
-    // Listen for any user interaction to start music
     const userInteractionEvents = ['click', 'keydown', 'touchstart'];
     const startMusicHandler = () => {
         startMusicAfterInteraction();
-        // remove listeners after first interaction
-        userInteractionEvents.forEach(event => document.removeEventListener(event, startMusicHandler));
+        userInteractionEvents.forEach(event =>
+            document.removeEventListener(event, startMusicHandler)
+        );
     };
-    userInteractionEvents.forEach(event => document.addEventListener(event, startMusicHandler));
+
+    userInteractionEvents.forEach(event =>
+        document.addEventListener(event, startMusicHandler)
+    );
 });
 
 window.MusicPlayer = {
