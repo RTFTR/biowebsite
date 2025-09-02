@@ -26,7 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('music-controls').style.display = 'flex';
       removeEventListeners();
       document.body.classList.add('video-normal');
-      window.MusicPlayer.start()
+    
+      // 비디오가 시작된 후 약간의 지연을 두고 음악 재생
+      setTimeout(() => {
+          window.MusicPlayer.start();
+      }, 300);
   }
 
   function addEventListeners() {
