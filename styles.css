@@ -39,6 +39,44 @@ body {
     pointer-events: none; /* allows clicks to pass through */
 }
 
+#music-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 295px 0 0 0;
+}
+
+#music-controls button {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#music-controls button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.08);
+}
+
+#music-controls i { pointer-events: none; }
+
+#volume-slider {
+  width: 120px;
+  accent-color: #a855f7;
+}
+
+#now-playing {
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+}
+
 #terminal-header:hover {
   background-color: #333333;
 }
