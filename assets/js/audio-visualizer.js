@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     prevBassIntensity = bassIntensity;
     
     const shadowBlur = 10 + bassIntensity * 30;
-    const shadowSpread = bassIntensity * 10;
+    const shadowSpread = bassIntensity * 15;
     const shadowColor = `rgba(255, 255, 255, ${0.7 + bassIntensity * 0.8})`;
     blurredBox.style.boxShadow = `0 0 ${shadowBlur}px ${shadowSpread}px ${shadowColor}`;
     if (bassIntensity > 0.3) {
