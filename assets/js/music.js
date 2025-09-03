@@ -1,4 +1,9 @@
-const songs = ["default.mp3", "default2.mp3", "default3.mp3"]; // add more songs here
+const songs = [
+    "HKLS - Homewave Resonance.mp3",
+    "LAKEY INSPIRED - Better Days.mp3",
+    "Joo Won - Fly Me to the Moon.mp3"
+];
+
 let currentSongIndex = 0;
 let isPlaying = false;
 const audio = new Audio();
@@ -27,29 +32,34 @@ function initMusicPlayer() {
 
 function loadSong(index) {
     audio.src = `./assets/music/${shuffledSongs[index]}`;
+    updateNowPlaying(shuffledSongs[index]);
+}
+
+function playSong(index) {
+    currentSongIndex = (index + shuffledSongs.length) % shuffledSongs.length;
+    loadSong(currentSongIndex);
+    audio.play().catch(err => console.error("Error playing song:", err));
+    isPlaying = true;
+    updatePlayIcon();
 }
 
 function nextSong() {
-    currentSongIndex = (currentSongIndex + 1) % shuffledSongs.length;
-    loadSong(currentSongIndex);
-    if (isPlaying) audio.play().catch(console.error);
+    playSong(currentSongIndex + 1);
 }
 
 function prevSong() {
-    currentSongIndex = (currentSongIndex - 1 + shuffledSongs.length) % shuffledSongs.length;
-    loadSong(currentSongIndex);
-    if (isPlaying) audio.play().catch(console.error);
+    playSong(currentSongIndex - 1);
 }
 
 function togglePlayPause() {
     if (isPlaying) {
         audio.pause();
         isPlaying = false;
-        playPauseBtn.textContent = "▶️";
+        playPauseBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
     } else {
         audio.play().catch(err => console.error('Play error:', err));
         isPlaying = true;
-        playPauseBtn.textContent = "⏸";
+        playPauseBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
     }
 }
 
@@ -57,18 +67,26 @@ function startMusicAfterTerminal() {
     if (!isPlaying) {
         isPlaying = true;
         audio.play().catch(err => console.error('Music playback error:', err));
-        playPauseBtn.textContent = "⏸";
+        playPauseBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
     }
 }
 
-// DOM stuff
+function updateNowPlaying(filename) {
+    const nowPlaying = document.getElementById('now-playing');
+    if (nowPlaying) {
+        const title = filename.replace(/\.[^/.]+$/, ""); // strip extension
+        nowPlaying.textContent = `Now Playing: ${title}`;
+    }
+}
+
+// DOM setup
 document.addEventListener('DOMContentLoaded', () => {
     shuffledSongs = shuffleArray([...songs]);
     initMusicPlayer();
 
-    const prevBtn = document.getElementById("prev-btn");
-    const playPauseBtn = document.getElementById("play-pause-btn");
-    const nextBtn = document.getElementById("next-btn");
+    window.prevBtn = document.getElementById("prev-btn");
+    window.playPauseBtn = document.getElementById("play-pause-btn");
+    window.nextBtn = document.getElementById("next-btn");
     const volumeSlider = document.getElementById("volume-slider");
 
     prevBtn.addEventListener("click", prevSong);
@@ -76,8 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener("click", nextSong);
 
     volumeSlider.addEventListener("input", (e) => {
-        audio.volume = e.target.value;
+        audio.volume = parseFloat(e.target.value);
     });
+
+    updateNowPlaying(shuffledSongs[currentSongIndex]);
 });
 
 window.MusicPlayer = {
