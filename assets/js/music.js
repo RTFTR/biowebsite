@@ -1,7 +1,10 @@
 const songs = [
     "HKLS - Homewave Resonance.mp3",
     "LAKEY INSPIRED - Better Days.mp3",
-    "Joo Won - Fly Me to the Moon.mp3"
+    "Joo Won - Fly Me to the Moon.mp3",
+    "Clair de Lune (Studio Version).mp3",
+    "The War Still Rages Within .mp3",
+    "092. Reunited (UNDERTALE Soundtrack) - Toby Fox.mp3"
 ];
 
 let currentSongIndex = 0;
