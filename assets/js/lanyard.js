@@ -12,10 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const activityDetails = document.getElementById('discord-activity-details');
   const activityState = document.getElementById('discord-activity-state');
   const albumArt = document.getElementById('discord-album-art');
-  
-  clickOverlay.style.fontFamily = "'Inter', sans-serif";
-  clickOverlay.style.fontSize = '32px';
-  clickOverlay.style.color = 'white';
 
   async function updateDiscordStatus() {
     try {
